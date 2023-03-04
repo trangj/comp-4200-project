@@ -3,20 +3,17 @@ package com.example.comp_4220_project;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Player1RollDieFragment#newInstance} factory method to
+ * Use the {@link GameBoardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Player1RollDieFragment extends Fragment {
+public class GameBoardFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +24,7 @@ public class Player1RollDieFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Player1RollDieFragment() {
+    public GameBoardFragment() {
         // Required empty public constructor
     }
 
@@ -37,19 +34,17 @@ public class Player1RollDieFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Player1RollDieFragment.
+     * @return A new instance of fragment GameBoardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Player1RollDieFragment newInstance(String param1, String param2) {
-        Player1RollDieFragment fragment = new Player1RollDieFragment();
+    public static GameBoardFragment newInstance(String param1, String param2) {
+        GameBoardFragment fragment = new GameBoardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-
-    Button continueButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,15 +59,6 @@ public class Player1RollDieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_player1_roll_die, container, false);
-        continueButton = view.findViewById(R.id.continueButton);
-        continueButton.setOnClickListener(e -> {
-            Player2RollDieFragment f = new Player2RollDieFragment();
-            FragmentManager fm = getParentFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.frame, f);
-            ft.commit();
-        });
-        return view;
+        return inflater.inflate(R.layout.fragment_game_board, container, false);
     }
 }

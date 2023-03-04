@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Player1RollDieFragment">
+    tools:context=".Player2RollDieFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -15,16 +15,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is the fragment for player 1's die roll" />
+            android:text="This is the fragment for player 2's die roll" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Roll" />
 
         <Button
-            android:id="@+id/continueButton"
+            android:id="@+id/continueButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Continue" />
