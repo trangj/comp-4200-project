@@ -3,24 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameBoardFragment">
+    tools:context=".GameOptionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is the board game" />
+            android:text="Player X's Turn" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/removeTileButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="*debug* Go back" />
+            android:text="Remove Tile" />
+
+        <Button
+            android:id="@+id/restoreTileButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Restore Tile" />
     </LinearLayout>
 
 </FrameLayout>

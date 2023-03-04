@@ -16,9 +16,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Intent i = getIntent();
-        int gameSize = i.getIntExtra("gameSize", 3);
-
         // loading initial fragment
         player1RollDie();
     }

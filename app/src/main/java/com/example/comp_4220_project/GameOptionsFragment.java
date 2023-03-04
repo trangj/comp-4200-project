@@ -13,10 +13,10 @@ import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Player2RollDieFragment#newInstance} factory method to
+ * Use the {@link GameOptionsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Player2RollDieFragment extends Fragment {
+public class GameOptionsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class Player2RollDieFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Player2RollDieFragment() {
+    public GameOptionsFragment() {
         // Required empty public constructor
     }
 
@@ -37,19 +37,17 @@ public class Player2RollDieFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Player2RollDieFragment.
+     * @return A new instance of fragment GameOptionsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Player2RollDieFragment newInstance(String param1, String param2) {
-        Player2RollDieFragment fragment = new Player2RollDieFragment();
+    public static GameOptionsFragment newInstance(String param1, String param2) {
+        GameOptionsFragment fragment = new GameOptionsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-
-    Button continueButton2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,17 +58,29 @@ public class Player2RollDieFragment extends Fragment {
         }
     }
 
+    Button removeTileButton;
+    Button restoreTileButton;
+    GameBoardFragment f = new GameBoardFragment();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_player2_roll_die, container, false);
-        continueButton2 = view.findViewById(R.id.continueButton2);
-        continueButton2.setOnClickListener(e -> {
-            GameOptionsFragment f = new GameOptionsFragment();
+        View view = inflater.inflate(R.layout.fragment_game_options, container, false);
+        removeTileButton = view.findViewById(R.id.removeTileButton);
+        restoreTileButton = view.findViewById(R.id.restoreTileButton);
+        removeTileButton.setOnClickListener(e -> {
             FragmentManager fm = getParentFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.frame, f);
+            ft.addToBackStack(null);
+            ft.commit();
+        });
+        restoreTileButton.setOnClickListener(e -> {
+            FragmentManager fm = getParentFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.frame, f);
+            ft.addToBackStack(null);
             ft.commit();
         });
         return view;

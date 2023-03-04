@@ -1,12 +1,15 @@
 package com.example.comp_4220_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +58,22 @@ public class GameBoardFragment extends Fragment {
         }
     }
 
+    Button button;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // get game size
+        GameActivity ga = (GameActivity) getActivity();
+        Intent i = ga.getIntent();
+        int gameSize = i.getIntExtra("gameSize", 0);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_board, container, false);
+        View view = inflater.inflate(R.layout.fragment_game_board, container, false);
+        button = view.findViewById(R.id.button4);
+        button.setOnClickListener(e -> {
+            getParentFragmentManager().popBackStack();
+        });
+        return view;
     }
 }
