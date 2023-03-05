@@ -11,10 +11,17 @@ import android.view.View;
 
 public class GameActivity extends AppCompatActivity {
 
+    boolean[][] board;
+    int playerTurn = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Intent intent = getIntent();
+        int gameSize = intent.getIntExtra("gameSize", 0);
+        board = new boolean[gameSize*2][gameSize];
 
         // loading initial fragment
         player1RollDie();
@@ -26,5 +33,17 @@ public class GameActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame, f);
         ft.commit();
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerTurn(int playerTurn) {
+        this.playerTurn = playerTurn;
+    }
+
+    public boolean[][] getBoard() {
+        return board;
     }
 }

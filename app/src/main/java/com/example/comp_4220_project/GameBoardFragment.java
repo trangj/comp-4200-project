@@ -3,13 +3,18 @@ package com.example.comp_4220_project;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,22 +63,43 @@ public class GameBoardFragment extends Fragment {
         }
     }
 
-    Button button;
+    LinearLayout boardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // get game size
-        GameActivity ga = (GameActivity) getActivity();
-        Intent i = ga.getIntent();
-        int gameSize = i.getIntExtra("gameSize", 0);
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game_board, container, false);
-        button = view.findViewById(R.id.button4);
-        button.setOnClickListener(e -> {
-            getParentFragmentManager().popBackStack();
-        });
+        boardView = view.findViewById(R.id.board);
+        boolean[][] board = ((GameActivity) getActivity()).getBoard();
+        drawBoard(board);
+
         return view;
+    }
+
+    public void drawBoard(boolean[][] board) {
+        int N = board.length;
+        int M = board[0].length;
+        boardView.removeAllViewsInLayout();
+        for (int i = 0; i < N; i++) {
+            LinearLayout boardRow = new LinearLayout((GameActivity) getActivity());
+            for (int j = 0; j < M; j++) {
+                Button btn = new Button((GameActivity) getActivity());
+                btn.setText(i + "," + j + "," + board[i][j]);
+                btn.setLayoutParams(new LinearLayout.LayoutParams(
+                        0,
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        1.0f
+                ));
+                int finalI = i;
+                int finalJ = j;
+                btn.setOnClickListener(e -> {
+                    board[finalI][finalJ] = true;
+                    getParentFragmentManager().popBackStack();
+                });
+                boardRow.addView(btn);
+            }
+            boardView.addView(boardRow);
+        }
     }
 }
