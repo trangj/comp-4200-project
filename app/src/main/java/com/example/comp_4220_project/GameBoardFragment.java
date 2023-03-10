@@ -63,7 +63,7 @@ public class GameBoardFragment extends Fragment {
         }
     }
 
-    LinearLayout boardView;
+    LinearLayout boardView, boardView2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,16 +71,17 @@ public class GameBoardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game_board, container, false);
         boardView = view.findViewById(R.id.board);
+        boardView2 = view.findViewById(R.id.board2);
         boolean[][] board = ((GameActivity) getActivity()).getBoard();
-        drawBoard(board);
-
+        drawBoard(board, boardView);
+        drawBoard(board, boardView2);
         return view;
     }
 
-    public void drawBoard(boolean[][] board) {
+    public void drawBoard(boolean[][] board, LinearLayout layout) {
         int N = board.length;
         int M = board[0].length;
-        boardView.removeAllViewsInLayout();
+        layout.removeAllViewsInLayout();
         for (int i = 0; i < N; i++) {
             LinearLayout boardRow = new LinearLayout((GameActivity) getActivity());
             for (int j = 0; j < M; j++) {
@@ -99,7 +100,7 @@ public class GameBoardFragment extends Fragment {
                 });
                 boardRow.addView(btn);
             }
-            boardView.addView(boardRow);
+            layout.addView(boardRow);
         }
     }
 }

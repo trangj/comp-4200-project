@@ -21,7 +21,7 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int gameSize = intent.getIntExtra("gameSize", 0);
-        board = new boolean[gameSize*2][gameSize];
+        board = new boolean[gameSize][gameSize];
 
         // loading initial fragment
         player1RollDie();

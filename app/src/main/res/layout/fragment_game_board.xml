@@ -12,10 +12,18 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/board"
+            android:id="@+id/board2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/board"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
 
     </LinearLayout>
 
