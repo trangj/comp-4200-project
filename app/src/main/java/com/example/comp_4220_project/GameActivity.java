@@ -12,6 +12,7 @@ import android.view.View;
 public class GameActivity extends AppCompatActivity {
 
     boolean[][] board;
+    boolean[][] board2;
     int playerTurn = 1;
 
     @Override
@@ -22,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int gameSize = intent.getIntExtra("gameSize", 0);
         board = new boolean[gameSize][gameSize];
+        board2 = new boolean[gameSize][gameSize];
 
         // loading initial fragment
         player1RollDie();
@@ -45,5 +47,9 @@ public class GameActivity extends AppCompatActivity {
 
     public boolean[][] getBoard() {
         return board;
+    }
+
+    public boolean[][] getBoard2() {
+        return board2;
     }
 }

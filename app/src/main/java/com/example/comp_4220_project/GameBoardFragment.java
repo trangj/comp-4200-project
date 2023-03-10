@@ -73,12 +73,14 @@ public class GameBoardFragment extends Fragment {
         boardView = view.findViewById(R.id.board);
         boardView2 = view.findViewById(R.id.board2);
         boolean[][] board = ((GameActivity) getActivity()).getBoard();
-        drawBoard(board, boardView);
-        drawBoard(board, boardView2);
+        boolean[][] board2 = ((GameActivity) getActivity()).getBoard2();
+        int playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
+        drawBoard(board, boardView, playerTurn == 1);
+        drawBoard(board2, boardView2, playerTurn == 2);
         return view;
     }
 
-    public void drawBoard(boolean[][] board, LinearLayout layout) {
+    public void drawBoard(boolean[][] board, LinearLayout layout, boolean disabled) {
         int N = board.length;
         int M = board[0].length;
         layout.removeAllViewsInLayout();
@@ -92,6 +94,14 @@ public class GameBoardFragment extends Fragment {
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         1.0f
                 ));
+
+                if(board[i][j] || disabled) {
+                    btn.setAlpha(0.5f);
+                }
+                if(disabled) {
+                    btn.setEnabled(false);
+                }
+
                 int finalI = i;
                 int finalJ = j;
                 btn.setOnClickListener(e -> {
