@@ -25,12 +25,10 @@ public class GameBoardFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "mode";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mode;
 
     public GameBoardFragment() {
         // Required empty public constructor
@@ -40,16 +38,14 @@ public class GameBoardFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param mode Parameter 1.
      * @return A new instance of fragment GameBoardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GameBoardFragment newInstance(String param1, String param2) {
+    public static GameBoardFragment newInstance(String mode) {
         GameBoardFragment fragment = new GameBoardFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, mode);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,8 +54,7 @@ public class GameBoardFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mode = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -105,8 +100,17 @@ public class GameBoardFragment extends Fragment {
                 int finalI = i;
                 int finalJ = j;
                 btn.setOnClickListener(e -> {
-                    board[finalI][finalJ] = true;
+                    if(mode.equals("restore") && !board[finalI][finalJ]) {
+                        return;
+                    } else if (mode.equals("restore") && board[finalI][finalJ]) {
+                        board[finalI][finalJ] = false;
+                    } else {
+                        board[finalI][finalJ] = true;
+                    }
+
                     getParentFragmentManager().popBackStack();
+                    int playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
+                    ((GameActivity) getActivity()).setPlayerTurn(playerTurn == 1 ? 2 : 1);
                 });
                 boardRow.addView(btn);
             }

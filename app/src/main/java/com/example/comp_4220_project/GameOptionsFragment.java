@@ -56,7 +56,6 @@ public class GameOptionsFragment extends Fragment {
 
     Button removeTileButton;
     Button restoreTileButton;
-    GameBoardFragment f = new GameBoardFragment();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +67,7 @@ public class GameOptionsFragment extends Fragment {
         removeTileButton.setOnClickListener(e -> {
             FragmentManager fm = getParentFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
+            GameBoardFragment f = GameBoardFragment.newInstance("remove");
             ft.replace(R.id.frame, f);
             ft.addToBackStack(null);
             ft.commit();
@@ -75,6 +75,7 @@ public class GameOptionsFragment extends Fragment {
         restoreTileButton.setOnClickListener(e -> {
             FragmentManager fm = getParentFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
+            GameBoardFragment f = GameBoardFragment.newInstance("restore");
             ft.replace(R.id.frame, f);
             ft.addToBackStack(null);
             ft.commit();
