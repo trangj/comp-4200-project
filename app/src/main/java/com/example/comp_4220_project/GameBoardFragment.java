@@ -136,13 +136,29 @@ public class GameBoardFragment extends Fragment {
                         board[finalI][finalJ] = true;
                     }
 
-                    getParentFragmentManager().popBackStack();
-                    int playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
+                    if (isWinner(board, playerTurn == 1)) {
+                        startActivity(new Intent(getActivity(), EndActivity.class));
+                        return;
+                    }
+
                     ((GameActivity) getActivity()).setPlayerTurn(playerTurn == 1 ? 2 : 1);
+                    getParentFragmentManager().popBackStack();
                 });
                 boardRow.addView(btn);
             }
             layout.addView(boardRow);
         }
     }
+
+    public boolean isWinner(boolean[][] board, boolean isPlayer1) {
+        int M = board[0].length;
+        for (int i = 0; i < M; i++) {
+            if ((isPlayer1 && board[0][i]) || (!isPlayer1 && board[M-1][i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
