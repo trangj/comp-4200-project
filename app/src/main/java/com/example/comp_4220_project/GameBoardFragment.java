@@ -59,6 +59,7 @@ public class GameBoardFragment extends Fragment {
     }
 
     LinearLayout boardView, boardView2;
+    int playerTurn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +70,7 @@ public class GameBoardFragment extends Fragment {
         boardView2 = view.findViewById(R.id.board2);
         boolean[][] board = ((GameActivity) getActivity()).getBoard();
         boolean[][] board2 = ((GameActivity) getActivity()).getBoard2();
-        int playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
+        playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
         drawBoard(board, boardView, playerTurn == 1);
         drawBoard(board2, boardView2, playerTurn == 2);
         return view;
@@ -90,21 +91,39 @@ public class GameBoardFragment extends Fragment {
                         1.0f
                 ));
 
-                if(board[i][j] || disabled) {
-                    btn.setAlpha(0.5f);
+                // make every tile disabled
+                btn.setEnabled(false);
+
+                // if the tile has been removed, grey it out so that it can still be pressed if restored
+                if(board[i][j]) {
+                    btn.setAlpha(0.1f);
                 }
-                if(disabled) {
-                    btn.setEnabled(false);
+
+                // if it is the enemy board, and it is on the edge (middle) then enable it
+                if (!disabled) {
+                    if (playerTurn == 1 && (i == N - 1 || board[i+1][j])) {
+                        btn.setEnabled(true);
+                    } else if (playerTurn == 2 && (i == 0 || board[i-1][j])) {
+                        btn.setEnabled(true);
+                    }
                 }
 
                 int finalI = i;
                 int finalJ = j;
                 btn.setOnClickListener(e -> {
                     if(mode.equals("restore") && !board[finalI][finalJ]) {
+                        // cannot restore a tile that has not been removed
                         return;
                     } else if (mode.equals("restore") && board[finalI][finalJ]) {
+                        // restore tile
                         board[finalI][finalJ] = false;
-                    } else {
+                    }
+
+                    if(mode.equals("remove") && board[finalI][finalJ]) {
+                        // cannot remove already removed tile
+                        return;
+                    } else if (mode.equals("remove") && !board[finalI][finalJ]) {
+                        // remove tile
                         board[finalI][finalJ] = true;
                     }
 
