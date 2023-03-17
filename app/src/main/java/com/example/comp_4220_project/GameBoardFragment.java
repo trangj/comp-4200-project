@@ -71,8 +71,8 @@ public class GameBoardFragment extends Fragment {
         boolean[][] board = ((GameActivity) getActivity()).getBoard();
         boolean[][] board2 = ((GameActivity) getActivity()).getBoard2();
         playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
-        drawBoard(board, boardView, playerTurn == 1);
-        drawBoard(board2, boardView2, playerTurn == 2);
+        drawBoard(board, boardView, (playerTurn == 1 && mode.equals("remove")) || (playerTurn == 2 && mode.equals("restore")));
+        drawBoard(board2, boardView2, (playerTurn == 2 && mode.equals("remove")) || (playerTurn == 1 && mode.equals("restore")));
         return view;
     }
 
@@ -97,10 +97,19 @@ public class GameBoardFragment extends Fragment {
                 // if the tile has been removed, grey it out so that it can still be pressed if restored
                 if(board[i][j]) {
                     btn.setAlpha(0.1f);
+
+                    // enable tiles that are on the edge of the player's own board
+                    if (!disabled && mode.equals("restore")) {
+                        if (playerTurn == 2 && i >= 1 && !board[i-1][j]) {
+                            btn.setEnabled(true);
+                        } else if (playerTurn == 1 && i < N - 1 && !board[i+1][j]) {
+                            btn.setEnabled(true);
+                        }
+                    }
                 }
 
                 // if it is the enemy board, and it is on the edge (middle) then enable it
-                if (!disabled) {
+                if (!disabled && mode.equals("remove")) {
                     if (playerTurn == 1 && (i == N - 1 || board[i+1][j])) {
                         btn.setEnabled(true);
                     } else if (playerTurn == 2 && (i == 0 || board[i-1][j])) {
