@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -59,14 +60,18 @@ public class GameOptionsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    TextView title;
     Button removeTileButton;
     Button restoreTileButton;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game_options, container, false);
+        title = view.findViewById(R.id.game_option_title);
+        int player_turn = ((GameActivity) getActivity()).getPlayerTurn();
+        if(player_turn == 1) title.setText(R.string.text_player_1_turn);
+        else title.setText(R.string.text_player_2_turn);
         removeTileButton = view.findViewById(R.id.removeTileButton);
         restoreTileButton = view.findViewById(R.id.restoreTileButton);
         removeTileButton.setOnClickListener(e -> {

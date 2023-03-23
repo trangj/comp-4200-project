@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Player1RollDieFragment#newInstance} factory method to
@@ -111,6 +113,7 @@ public class Player1RollDieFragment extends Fragment {
                 player_turn++;
 
                 if(player_turn == 1) player.setText(R.string.text_player_2_turn);
+                if(player_turn == 2) player.setText(R.string.text_player_1_turn);
 
                 die_1.setImageResource(images[i1]);
                 die_2.setImageResource(images[i2]);
@@ -118,6 +121,9 @@ public class Player1RollDieFragment extends Fragment {
                 if(high_roll[0] == high_roll[1]) player_turn = 0;
 
                 if(player_turn == 2) {
+
+                    if(high_roll[0] > high_roll[1]) ((GameActivity) requireActivity()).setPlayerTurn(1);
+                    else ((GameActivity) requireActivity()).setPlayerTurn(2);
                     GameOptionsFragment f = new GameOptionsFragment();
                     FragmentManager fm = getParentFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
