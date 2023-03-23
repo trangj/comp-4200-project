@@ -52,4 +52,5 @@ public class GameActivity extends AppCompatActivity {
     public boolean[][] getBoard2() {
         return board2;
     }
+
 }
