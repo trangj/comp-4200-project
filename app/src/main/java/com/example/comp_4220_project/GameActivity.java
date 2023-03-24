@@ -37,8 +37,6 @@ public class GameActivity extends AppCompatActivity {
         } else {
             board = to2dArray(savedBoard1dPlayer1, gameSize);
             board2 = to2dArray(savedBoard1dPlayer2, gameSize);
-            Log.d("test", Arrays.deepToString(board));
-            Log.d("test", Arrays.deepToString(board2));
         }
 
         buttonMenu = findViewById(R.id.buttonMenu);
@@ -53,12 +51,25 @@ public class GameActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-        // loading initial fragment
-        player1RollDie();
+        if(savedBoard1dPlayer1 == null || savedBoard1dPlayer2 == null) {
+            // loading initial fragment
+            player1RollDie();
+        } else {
+            // if we are loading a save, then skip to the game options
+            gameOptions();
+        }
     }
 
     public void player1RollDie() {
         Player1RollDieFragment f = new Player1RollDieFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame, f);
+        ft.commit();
+    }
+
+    public void gameOptions() {
+        GameOptionsFragment f = new GameOptionsFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame, f);
