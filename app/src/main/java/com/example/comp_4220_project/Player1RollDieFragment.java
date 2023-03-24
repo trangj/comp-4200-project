@@ -106,8 +106,6 @@ public class Player1RollDieFragment extends Fragment {
                 int i2 = rand_n(0, 5);
                 player_score = (i1 + 1) + (i2 + 1);
                 high_roll[player_turn] = player_score;
-                Log.d("Player:", String.valueOf(player_turn+1));
-                Log.d("Roll:", String.valueOf(high_roll[player_turn]));
                 if(player_turn == 0) player_x.setText(String.valueOf(player_score));
                 else player_y.setText(String.valueOf(player_score));
                 player_turn++;

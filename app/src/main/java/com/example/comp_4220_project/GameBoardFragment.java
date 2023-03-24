@@ -170,7 +170,7 @@ public class GameBoardFragment extends Fragment {
         if(savedInstanceState != null) return;
         postponeEnterTransition();
         view.setBackgroundColor(Color.WHITE);
-        view.post(() -> postponeEnterTransition(3000, TimeUnit.MILLISECONDS));
+        view.post(() -> postponeEnterTransition(2000, TimeUnit.MILLISECONDS));
     }
 
 }
