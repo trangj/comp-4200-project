@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class InGameMenuActivity extends AppCompatActivity {
 
-    Button buttonSave, buttonExit;
+    Button buttonSave, buttonExit, buttonExitToMainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,7 @@ public class InGameMenuActivity extends AppCompatActivity {
 
         buttonSave = findViewById(R.id.buttonSave);
         buttonExit = findViewById(R.id.buttonExit);
+        buttonExitToMainMenu = findViewById(R.id.buttonExitToMainMenu);
 
         buttonSave.setOnClickListener(e -> {
             Intent i = getIntent();
@@ -27,10 +29,15 @@ public class InGameMenuActivity extends AppCompatActivity {
             int boardSize  = i.getIntExtra("boardSize", 0);
 
             save(board1dPlayer1, board1dPlayer2, boardSize, playerTurn);
+            Toast.makeText(getApplicationContext(), "Game has been saved", Toast.LENGTH_SHORT).show();
         });
 
         buttonExit.setOnClickListener(e -> {
             finish();
+        });
+
+        buttonExitToMainMenu.setOnClickListener(e -> {
+            navigateUpTo(new Intent(getBaseContext(), MainActivity.class));
         });
     }
 
