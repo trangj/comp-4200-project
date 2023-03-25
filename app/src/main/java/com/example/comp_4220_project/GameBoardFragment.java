@@ -1,6 +1,7 @@
 package com.example.comp_4220_project;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -17,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,6 +63,8 @@ public class GameBoardFragment extends Fragment {
     }
 
     LinearLayout boardView, boardView2;
+    TextView textViewPlayerTurn;
+    boolean[][] board, board2;
     int playerTurn;
 
     @Override
@@ -69,15 +74,17 @@ public class GameBoardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game_board, container, false);
         boardView = view.findViewById(R.id.board);
         boardView2 = view.findViewById(R.id.board2);
-        boolean[][] board = ((GameActivity) getActivity()).getBoard();
-        boolean[][] board2 = ((GameActivity) getActivity()).getBoard2();
+        textViewPlayerTurn = view.findViewById(R.id.textViewPlayerTurn);
+        board = ((GameActivity) getActivity()).getBoard();
+        board2 = ((GameActivity) getActivity()).getBoard2();
         playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
-        drawBoard(board, boardView, (playerTurn == 1 && mode.equals("remove")) || (playerTurn == 2 && mode.equals("restore")));
-        drawBoard(board2, boardView2, (playerTurn == 2 && mode.equals("remove")) || (playerTurn == 1 && mode.equals("restore")));
+        textViewPlayerTurn.setText("It is currently player " + playerTurn + "'s turn");
+        drawBoard(board, boardView, (playerTurn == 1 && mode.equals("remove")) || (playerTurn == 2 && mode.equals("restore")), true);
+        drawBoard(board2, boardView2, (playerTurn == 2 && mode.equals("remove")) || (playerTurn == 1 && mode.equals("restore")), false);
         return view;
     }
 
-    public void drawBoard(boolean[][] board, LinearLayout layout, boolean disabled) {
+    public void drawBoard(boolean[][] board, LinearLayout layout, boolean disabled, boolean isPlayer1) {
         int N = board.length;
         int M = board[0].length;
         layout.removeAllViewsInLayout();
@@ -85,7 +92,13 @@ public class GameBoardFragment extends Fragment {
             LinearLayout boardRow = new LinearLayout((GameActivity) getActivity());
             for (int j = 0; j < M; j++) {
                 Button btn = new Button((GameActivity) getActivity());
-                btn.setText(i + "," + j + "," + board[i][j]);
+
+                if (isPlayer1) {
+                    btn.setText(Integer.toString(N-i));
+                } else {
+                    btn.setText(Integer.toString(i+1));
+                }
+
                 btn.setLayoutParams(new LinearLayout.LayoutParams(
                         0,
                         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -137,7 +150,7 @@ public class GameBoardFragment extends Fragment {
                         board[finalI][finalJ] = true;
                     }
 
-                    if (isWinner(board, playerTurn == 1)) {
+                    if (isWinner()) {
                         startActivity(new Intent(getActivity(), EndActivity.class));
                         return;
                     }
@@ -151,11 +164,14 @@ public class GameBoardFragment extends Fragment {
         }
     }
 
-    public boolean isWinner(boolean[][] board, boolean isPlayer1) {
+    public boolean isWinner() {
+        int N = board.length;
         int M = board[0].length;
-        for (int i = 0; i < M; i++) {
-            if ((isPlayer1 && board[0][i]) || (!isPlayer1 && board[M-1][i])) {
-                return true;
+        for(int i = 0; i < M; i++) {
+            if (playerTurn == 1) {
+                if (board2[0][i]) return true;
+            } else {
+                if (board[N-1][i]) return true;
             }
         }
         return false;
