@@ -18,7 +18,7 @@ public class EndActivity extends AppCompatActivity {
         mainMenuButton = findViewById(R.id.mainMenuButton);
 
         mainMenuButton.setOnClickListener(e -> {
-            startActivity(new Intent(EndActivity.this, MainActivity.class));
+            navigateUpTo(new Intent(getBaseContext(), MainActivity.class));
         });
     }
 }
