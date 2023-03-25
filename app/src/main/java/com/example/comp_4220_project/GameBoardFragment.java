@@ -7,19 +7,15 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.concurrent.TimeUnit;
 
@@ -95,8 +91,10 @@ public class GameBoardFragment extends Fragment {
 
                 if (isPlayer1) {
                     btn.setText(Integer.toString(N-i));
+                    btn.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.button_tile_player1));
                 } else {
                     btn.setText(Integer.toString(i+1));
+                    btn.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.button_tile_player2));
                 }
 
                 btn.setLayoutParams(new LinearLayout.LayoutParams(
