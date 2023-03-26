@@ -28,16 +28,6 @@ public class MainActivity extends AppCompatActivity {
         studio = findViewById(R.id.studios);
         View root = findViewById(android.R.id.content);
 
-        //shared preferences setup
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        Set<String> mySet = new HashSet<>();
-        mySet.add("MUSIC_OFF");
-        mySet.add("FX_OFF");
-        mySet.add("DARK_OFF");
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet("mySetKey", mySet);
-        editor.apply();
-
         Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         fadeOut.setAnimationListener(new Animation.AnimationListener() {
             @Override

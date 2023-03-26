@@ -11,6 +11,10 @@ import androidx.annotation.Nullable;
 public class Music extends Service {
     private MediaPlayer player;
 
+    public MediaPlayer getPlayer() {
+        return player;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -21,7 +25,6 @@ public class Music extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         player.start();
-        Log.d("test", "music playing");
         return START_STICKY;
     }
 
@@ -30,7 +33,6 @@ public class Music extends Service {
         super.onDestroy();
         player.stop();
         player.release();
-        Log.d("test", "music stopped");
     }
 
     @Nullable
