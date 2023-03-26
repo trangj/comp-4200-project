@@ -83,8 +83,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void back(){
-        Intent intent = new Intent(Settings.this, Home.class);
-        startActivity(intent);
+        finish();
     }
 
     public void loadPreferences(ToggleButton m, ToggleButton f, ToggleButton d){
