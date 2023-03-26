@@ -1,20 +1,23 @@
 package com.example.comp_4220_project;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,11 +26,8 @@ import android.widget.TextView;
  */
 public class GameBoardFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "mode";
 
-    // TODO: Rename and change types of parameters
     private String mode;
 
     public GameBoardFragment() {
@@ -59,6 +59,9 @@ public class GameBoardFragment extends Fragment {
     }
 
     LinearLayout boardView, boardView2;
+    TextView textViewPlayerTurn;
+    boolean[][] board, board2;
+    int playerTurn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,15 +70,17 @@ public class GameBoardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game_board, container, false);
         boardView = view.findViewById(R.id.board);
         boardView2 = view.findViewById(R.id.board2);
-        boolean[][] board = ((GameActivity) getActivity()).getBoard();
-        boolean[][] board2 = ((GameActivity) getActivity()).getBoard2();
-        int playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
-        drawBoard(board, boardView, playerTurn == 1);
-        drawBoard(board2, boardView2, playerTurn == 2);
+        textViewPlayerTurn = view.findViewById(R.id.textViewPlayerTurn);
+        board = ((GameActivity) getActivity()).getBoard();
+        board2 = ((GameActivity) getActivity()).getBoard2();
+        playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
+        textViewPlayerTurn.setText("It is currently player " + playerTurn + "'s turn");
+        drawBoard(board, boardView, (playerTurn == 1 && mode.equals("remove")) || (playerTurn == 2 && mode.equals("restore")), true);
+        drawBoard(board2, boardView2, (playerTurn == 2 && mode.equals("remove")) || (playerTurn == 1 && mode.equals("restore")), false);
         return view;
     }
 
-    public void drawBoard(boolean[][] board, LinearLayout layout, boolean disabled) {
+    public void drawBoard(boolean[][] board, LinearLayout layout, boolean disabled, boolean isPlayer1) {
         int N = board.length;
         int M = board[0].length;
         layout.removeAllViewsInLayout();
@@ -83,38 +88,100 @@ public class GameBoardFragment extends Fragment {
             LinearLayout boardRow = new LinearLayout((GameActivity) getActivity());
             for (int j = 0; j < M; j++) {
                 Button btn = new Button((GameActivity) getActivity());
-                btn.setText(i + "," + j + "," + board[i][j]);
+
+                if (isPlayer1) {
+                    btn.setText(Integer.toString(N-i));
+                    btn.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.button_tile_player1));
+                } else {
+                    btn.setText(Integer.toString(i+1));
+                    btn.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.button_tile_player2));
+                }
+
                 btn.setLayoutParams(new LinearLayout.LayoutParams(
                         0,
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         1.0f
                 ));
 
-                if(board[i][j] || disabled) {
-                    btn.setAlpha(0.5f);
+                // make every tile disabled
+                btn.setEnabled(false);
+
+                // if the tile has been removed, grey it out so that it can still be pressed if restored
+                if(board[i][j]) {
+                    btn.setAlpha(0.1f);
+
+                    // enable tiles that are on the edge of the player's own board
+                    if (!disabled && mode.equals("restore")) {
+                        if (playerTurn == 2 && i >= 1 && !board[i-1][j]) {
+                            btn.setEnabled(true);
+                        } else if (playerTurn == 1 && i < N - 1 && !board[i+1][j]) {
+                            btn.setEnabled(true);
+                        }
+                    }
                 }
-                if(disabled) {
-                    btn.setEnabled(false);
+
+                // if it is the enemy board, and it is on the edge (middle) then enable it
+                if (!disabled && mode.equals("remove")) {
+                    if (playerTurn == 1 && (i == N - 1 || board[i+1][j])) {
+                        btn.setEnabled(true);
+                    } else if (playerTurn == 2 && (i == 0 || board[i-1][j])) {
+                        btn.setEnabled(true);
+                    }
                 }
 
                 int finalI = i;
                 int finalJ = j;
                 btn.setOnClickListener(e -> {
                     if(mode.equals("restore") && !board[finalI][finalJ]) {
+                        // cannot restore a tile that has not been removed
                         return;
                     } else if (mode.equals("restore") && board[finalI][finalJ]) {
+                        // restore tile
                         board[finalI][finalJ] = false;
-                    } else {
+                    }
+
+                    if(mode.equals("remove") && board[finalI][finalJ]) {
+                        // cannot remove already removed tile
+                        return;
+                    } else if (mode.equals("remove") && !board[finalI][finalJ]) {
+                        // remove tile
                         board[finalI][finalJ] = true;
                     }
 
-                    getParentFragmentManager().popBackStack();
-                    int playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
+                    if (isWinner()) {
+                        startActivity(new Intent(getActivity(), EndActivity.class));
+                        return;
+                    }
+
                     ((GameActivity) getActivity()).setPlayerTurn(playerTurn == 1 ? 2 : 1);
+                    getParentFragmentManager().popBackStack();
                 });
                 boardRow.addView(btn);
             }
             layout.addView(boardRow);
         }
     }
+
+    public boolean isWinner() {
+        int N = board.length;
+        int M = board[0].length;
+        for(int i = 0; i < M; i++) {
+            if (playerTurn == 1) {
+                if (board2[0][i]) return true;
+            } else {
+                if (board[N-1][i]) return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(savedInstanceState != null) return;
+        postponeEnterTransition();
+        view.setBackgroundColor(Color.WHITE);
+        view.post(() -> postponeEnterTransition(2000, TimeUnit.MILLISECONDS));
+    }
+
 }
