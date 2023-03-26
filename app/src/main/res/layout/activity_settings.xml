@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Settings">
+
+    <TextView
+        android:id="@+id/settings_title"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="4dp"
+        android:text="Settings"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#5C1AD3"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/music_text"
+        android:layout_width="158dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="404dp"
+        android:text="Music"
+        android:textAlignment="center"
+        android:textColor="#673AB7"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/music_toggle"
+        android:layout_width="137dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="404dp"
+        android:textColor="#070707"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/dark_text"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="312dp"
+        android:text="Dark Mode"
+        android:textAlignment="center"
+        android:textColor="#673AB7"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/dark_toggle"
+        android:layout_width="137dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="316dp"
+        android:textColor="#070707"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/fx_text"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="228dp"
+        android:text="Sound FX"
+        android:textAlignment="center"
+        android:textColor="#673AB7"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/fx_toggle"
+        android:layout_width="139dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="228dp"
+        android:textColor="#070707"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="304dp"
+        android:layout_marginBottom="16dp"
+        android:text="Back"
+        android:onClick="back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
