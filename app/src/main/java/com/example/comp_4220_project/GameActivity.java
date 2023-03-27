@@ -17,6 +17,22 @@ public class GameActivity extends AppCompatActivity {
     boolean[][] board;
     boolean[][] board2;
     int playerTurn = 1;
+    int player_1_score = 0;
+    int player_2_score = 0;
+
+    public int getPlayer_1_score() { return player_1_score; }
+
+    public void setPlayer_1_score(int player_1_score) { this.player_1_score = player_1_score; }
+
+    public int getPlayer_2_score() { return player_2_score; }
+
+    public void setPlayer_2_score(int player_2_score) { this.player_2_score = player_2_score; }
+
+    public void set_zero(){
+        this.player_1_score = 0;
+        this.player_2_score = 0;
+    }
+
     Button buttonMenu;
 
     @Override
