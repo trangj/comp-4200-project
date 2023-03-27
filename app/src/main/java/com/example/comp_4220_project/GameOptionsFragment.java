@@ -128,6 +128,14 @@ public class GameOptionsFragment extends Fragment {
             }
         });
 
+        GameActivity a = ((GameActivity) getActivity());
+        if(turn == 1 && a.getPlayer1NumRestored() >= a.getBoard().length - 1) {
+            restoreTileButton.setEnabled(false);
+        }
+        if(turn == 2 && a.getPlayer2NumRestored() >= a.getBoard().length - 1) {
+            restoreTileButton.setEnabled(false);
+        }
+
         restoreTileButton.setOnClickListener(e -> {
             FragmentManager fm = getParentFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();

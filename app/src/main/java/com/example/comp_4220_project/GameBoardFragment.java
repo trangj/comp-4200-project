@@ -138,6 +138,12 @@ public class GameBoardFragment extends Fragment {
                     } else if (mode.equals("restore") && board[finalI][finalJ]) {
                         // restore tile
                         board[finalI][finalJ] = false;
+                        GameActivity a = ((GameActivity) getActivity());
+                        if(playerTurn == 1) {
+                            a.setPlayer1NumRestored(a.getPlayer1NumRestored() + 1);
+                        } else {
+                            a.setPlayer2NumRestored(a.getPlayer2NumRestored() + 1);
+                        }
                     }
 
                     if(mode.equals("remove") && board[finalI][finalJ]) {
