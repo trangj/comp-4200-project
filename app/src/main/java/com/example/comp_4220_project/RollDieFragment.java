@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
-public class Player1RollDieFragment extends Fragment {
+public class RollDieFragment extends Fragment {
 
-    public Player1RollDieFragment() {
+    public RollDieFragment() {
         // Required empty public constructor
     }
 
@@ -67,7 +67,7 @@ public class Player1RollDieFragment extends Fragment {
                 die_2.setImageResource(images[i2]);
                 player_score = (i1 + 1) + (i2 + 1);
 
-                Player1RollDieFragment rollDieFragment = new Player1RollDieFragment();
+                RollDieFragment rollDieFragment = new RollDieFragment();
                 GameOptionsFragment gameOptionsFragment = new GameOptionsFragment();
                 FragmentManager fm = getParentFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -160,6 +160,6 @@ public class Player1RollDieFragment extends Fragment {
         if(savedInstanceState != null) return;
         postponeEnterTransition();
         view.setBackgroundColor(Color.WHITE);
-        view.post(() -> postponeEnterTransition(1000, TimeUnit.MILLISECONDS));
+        view.post(() -> postponeEnterTransition(1500, TimeUnit.MILLISECONDS));
     }
 }

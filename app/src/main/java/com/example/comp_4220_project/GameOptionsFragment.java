@@ -87,6 +87,7 @@ public class GameOptionsFragment extends Fragment {
                     if(p1_score > p2_score){
                         ((GameActivity) requireActivity()).set_zero();
                         GameBoardFragment f = GameBoardFragment.newInstance("remove");
+                        ft.addToBackStack(null);
                         ft.replace(R.id.frame, f);
                         ft.commit();
                     }
@@ -95,6 +96,7 @@ public class GameOptionsFragment extends Fragment {
                         ((GameActivity) requireActivity()).set_zero();
                         ((GameActivity) requireActivity()).setPlayerTurn(2);
                         GameOptionsFragment g = new GameOptionsFragment();
+                        ft.addToBackStack(null);
                         ft.replace(R.id.frame, g);
                         ft.commit();
                     }
@@ -110,6 +112,7 @@ public class GameOptionsFragment extends Fragment {
                     if(p2_score > p1_score){
                         ((GameActivity) requireActivity()).set_zero();
                         GameBoardFragment f = GameBoardFragment.newInstance("remove");
+                        ft.addToBackStack(null);
                         ft.replace(R.id.frame, f);
                         ft.commit();
                     }
@@ -117,14 +120,11 @@ public class GameOptionsFragment extends Fragment {
                         ((GameActivity) requireActivity()).set_zero();
                         ((GameActivity) requireActivity()).setPlayerTurn(1);
                         GameOptionsFragment g = new GameOptionsFragment();
+                        ft.addToBackStack(null);
                         ft.replace(R.id.frame, g);
                         ft.commit();
                     }
                 }
-
-
-
-
             }
         });
 
@@ -145,7 +145,7 @@ public class GameOptionsFragment extends Fragment {
         if(savedInstanceState != null) return;
         postponeEnterTransition();
         view.setBackgroundColor(Color.WHITE);
-        view.post(() -> postponeEnterTransition(1000, TimeUnit.MILLISECONDS));
+        view.post(() -> postponeEnterTransition(1500, TimeUnit.MILLISECONDS));
     }
     public int rand_n(int min, int max) { return (int) ((Math.random() * (max - min)) + min); }
     public void player_turn(int turn, int score_1, int score_2){
