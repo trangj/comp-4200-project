@@ -8,16 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Iterator;
-import java.util.Set;
 
 public class Home extends AppCompatActivity {
     Button newGameButton, settings, loadGameButton;
@@ -47,13 +43,19 @@ public class Home extends AppCompatActivity {
         press = MediaPlayer.create(this, R.raw.press);
 
         newGameButton = findViewById(R.id.newGameButton);
+        loadGameButton = findViewById(R.id.loadGameButton);
         settings = findViewById(R.id.settingsButton);
         title = findViewById(R.id.title);
 
         //title drop in animation
         Animation dropInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.drop_in);
+        Animation slide_up = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
         title.setAnimation(dropInAnimation);
+        newGameButton.setAnimation(slide_up);
+        loadGameButton.setAnimation(slide_up);
+        settings.setAnimation(slide_up);
         dropInAnimation.start();
+        slide_up.start();
         //new game button listener
         newGameButton.setOnClickListener(e -> {
             sound(press);
@@ -70,7 +72,7 @@ public class Home extends AppCompatActivity {
             }
         });
         //load game button listener
-        loadGameButton = findViewById(R.id.loadGameButton);
+
         loadGameButton.setOnClickListener(e -> {
             SharedPreferences s = getSharedPreferences("Game", MODE_PRIVATE);
             Intent intent = new Intent(Home.this, GameActivity.class);
