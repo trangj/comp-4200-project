@@ -155,7 +155,9 @@ public class GameBoardFragment extends Fragment {
                     }
 
                     if (isWinner()) {
-                        startActivity(new Intent(getActivity(), EndActivity.class));
+                        Intent intent = new Intent(getActivity(), EndActivity.class);
+                        intent.putExtra("winner", playerTurn);
+                        startActivity(intent);
                         return;
                     }
 
