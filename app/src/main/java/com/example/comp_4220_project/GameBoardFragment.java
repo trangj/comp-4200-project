@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +106,8 @@ public class GameBoardFragment extends Fragment {
         for (int i = 0; i < N; i++) {
             LinearLayout boardRow = new LinearLayout((GameActivity) getActivity());
             for (int j = 0; j < M; j++) {
-                Button btn = new Button((GameActivity) getActivity());
+                ContextThemeWrapper gameActivity = new ContextThemeWrapper((GameActivity) getActivity(), R.style.board_option_buttons_style);
+                Button btn = new Button(gameActivity);
 
                 if (isPlayer1) {
                     btn.setText(Integer.toString(N-i));
@@ -125,7 +128,7 @@ public class GameBoardFragment extends Fragment {
 
                 // if the tile has been removed, grey it out so that it can still be pressed if restored
                 if(board[i][j]) {
-                    btn.setAlpha(0.1f);
+                    btn.setAlpha(0.5f);
 
                     // enable tiles that are on the edge of the player's own board
                     if (!disabled && mode.equals("restore")) {
