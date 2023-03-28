@@ -11,24 +11,16 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/fal"
-        android:layout_width="wrap_content"
+        android:id="@+id/dropout"
+        android:layout_width="378dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
         android:fontFamily="casual"
-        android:text="False"
+        android:text="Dropout"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="60dp" />
-
-    <TextView
-        android:id="@+id/prophets"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:fontFamily="sans-serif-black"
-        android:text="Prophets"
-        android:textColor="@color/black"
-        android:textSize="60dp" />
+        android:textSize="96sp"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/studios"

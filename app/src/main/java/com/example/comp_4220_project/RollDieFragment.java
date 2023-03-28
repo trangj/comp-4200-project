@@ -1,16 +1,23 @@
 package com.example.comp_4220_project;
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +33,11 @@ public class RollDieFragment extends Fragment {
     ImageView die_1, die_2;
     int[] images = {R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five, R.drawable.six };
     Button continueButton;
+    View anim, score;
+    MediaPlayer roll;
+    Boolean m_mode, fx_mode, dark_mode;//holds app settings
+    SharedPreferences sp;// used to store settings as preferences
+    SharedPreferences.Editor editor;// used to edit preferences
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +53,13 @@ public class RollDieFragment extends Fragment {
         player = (TextView) view.findViewById(R.id.player_id);
         player_x = (TextView) view.findViewById(R.id.player_x_score);
         player_y = (TextView) view.findViewById(R.id.player_y_score);
+        anim = (LinearLayout) view.findViewById(R.id.animation_layout);
+        score = (LinearLayout) view.findViewById(R.id.score_layout);
+        roll = MediaPlayer.create(getContext(), R.raw.roll);
+
+        sp = getActivity().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        editor = sp.edit();
+        loadPreferences();
 
         int player_1_score = ((GameActivity) requireActivity()).getPlayer_1_score();
         int player_2_score = ((GameActivity) requireActivity()).getPlayer_2_score();
@@ -73,6 +92,7 @@ public class RollDieFragment extends Fragment {
                 FragmentTransaction ft = fm.beginTransaction();
 
                 if(turn == 1) {
+                    sound(roll);
                     ((GameActivity) requireActivity()).setPlayer_1_score(player_score);
                     p1_score = ((GameActivity) requireActivity()).getPlayer_1_score();
                     player_turn(turn, p1_score, p2_score);
@@ -85,6 +105,7 @@ public class RollDieFragment extends Fragment {
                 }
 
                 if(turn == 2){
+                    sound(roll);
                     ((GameActivity) requireActivity()).setPlayer_2_score(player_score);
                     p2_score = ((GameActivity) requireActivity()).getPlayer_2_score();
                     player_turn(turn, p1_score, p2_score);
@@ -161,5 +182,36 @@ public class RollDieFragment extends Fragment {
         postponeEnterTransition();
         view.setBackgroundColor(Color.WHITE);
         view.post(() -> postponeEnterTransition(1500, TimeUnit.MILLISECONDS));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(roll != null){
+            roll.release();
+            roll = null;
+        }
+    }
+
+    //if sound effects game setting is set to on, the MediaPlayer will play its audio
+    public void sound(MediaPlayer mp){
+        if(fx_mode){
+            mp.start();
+        }
+    }
+
+    //used to save the sharedPreferences as local variables
+    public void loadPreferences(){
+        m_mode = sp.getBoolean("music", false);
+        fx_mode = sp.getBoolean("fx", false);
+        dark_mode = sp.getBoolean("dark", false);
+        if(dark_mode){
+            anim.setBackgroundColor(getResources().getColor(R.color.black));
+            score.setBackgroundColor(getResources().getColor(R.color.black));
+        }
+        else{
+            anim.setBackgroundColor(getResources().getColor(R.color.yellow));
+            score.setBackgroundColor(getResources().getColor(R.color.yellow));
+        }
     }
 }

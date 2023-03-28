@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="#FFC107"
     android:orientation="vertical"
     tools:context=".Home">
 
@@ -24,6 +23,7 @@
         style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="@string/text_new_game" />
 
     <Button
@@ -31,6 +31,7 @@
         style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="@string/text_load_game" />
 
     <Button
@@ -38,5 +39,6 @@
         style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="@string/text_settings" />
 </LinearLayout>

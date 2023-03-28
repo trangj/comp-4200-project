@@ -5,7 +5,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class GameActivity extends AppCompatActivity {
@@ -17,6 +20,13 @@ public class GameActivity extends AppCompatActivity {
     int player_2_score = 0;
     int player1NumRestored = 0;
     int player2NumRestored = 0;
+    Boolean m_mode, fx_mode, dark_mode;//holds app settings
+    SharedPreferences sp;// used to store settings as preferences
+    SharedPreferences.Editor editor;// used to edit preferences
+    View root;//used for dark mode
+
+    //sound effects media players
+    MediaPlayer press;
 
     public int getPlayer_1_score() { return player_1_score; }
 
@@ -50,10 +60,24 @@ public class GameActivity extends AppCompatActivity {
     Button buttonMenu;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        press.release();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        //used for settings(dark mode, music, sfx)
+        root = findViewById(android.R.id.content);
+        getSupportActionBar().hide();//hide activity bar
+        sp = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        editor = sp.edit();
+        loadPreferences();
 
+        //sound effects
+        press = MediaPlayer.create(this, R.raw.press);
 
         Intent intent = getIntent();
         int gameSize = intent.getIntExtra("gameSize", 0);
@@ -71,6 +95,7 @@ public class GameActivity extends AppCompatActivity {
 
         buttonMenu = findViewById(R.id.buttonMenu);
         buttonMenu.setOnClickListener(e -> {
+            sound(press);
             Intent i = new Intent(GameActivity.this, InGameMenuActivity.class);
             boolean[] board1dPlayer1 = to1dArray(board);
             boolean[] board1dPlayer2 = to1dArray(board2);
@@ -140,5 +165,27 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         return array2d;
+    }
+
+    //used to save the sharedPreferences as local variables
+    public void loadPreferences(){
+        m_mode = sp.getBoolean("music", false);
+        fx_mode = sp.getBoolean("fx", false);
+        dark_mode = sp.getBoolean("dark", false);
+        if(dark_mode){
+            root.setBackgroundColor(getResources().getColor(R.color.black));
+            root.invalidate();
+        }
+        else{
+            root.setBackgroundColor(getResources().getColor(R.color.yellow));
+            root.invalidate();
+        }
+    }
+
+    //if sound effects game setting is set to on, the MediaPlayer will play its audio
+    public void sound(MediaPlayer mp){
+        if(fx_mode){
+            mp.start();
+        }
     }
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC107"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp"
@@ -25,6 +24,7 @@
         style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="@string/text_save_game" />
 
     <Button
@@ -32,6 +32,7 @@
         style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="@string/text_back" />
 
     <Button
@@ -39,5 +40,6 @@
         style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="@string/text_exit_to_main_menu" />
 </LinearLayout>

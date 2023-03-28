@@ -11,10 +11,6 @@ import androidx.annotation.Nullable;
 public class Music extends Service {
     private MediaPlayer player;
 
-    public MediaPlayer getPlayer() {
-        return player;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();

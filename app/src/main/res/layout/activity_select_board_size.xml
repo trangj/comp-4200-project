@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC107"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingLeft="10dp"
@@ -26,11 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
+            android:soundEffectsEnabled="false"
             android:layout_marginRight="75dp"
             android:button="@android:drawable/btn_radio"
             android:checked="true"
             android:fontFamily="@font/bungee"
             android:text="@string/text_3_x_3"
+            android:textColor="#46039F"
             android:textAlignment="center"
             android:textSize="40sp" />
 
@@ -40,9 +41,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
             android:layout_marginRight="75dp"
+            android:soundEffectsEnabled="false"
             android:button="@android:drawable/btn_radio"
             android:fontFamily="@font/bungee"
             android:text="@string/text_4_x_4"
+            android:textColor="#46039F"
             android:textAlignment="center"
             android:textSize="40sp" />
 
@@ -50,11 +53,13 @@
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:soundEffectsEnabled="false"
             android:layout_marginLeft="75dp"
             android:layout_marginRight="75dp"
             android:button="@android:drawable/btn_radio"
             android:fontFamily="@font/bungee"
             android:text="@string/text_5_x_5"
+            android:textColor="#46039F"
             android:textAlignment="center"
             android:textSize="40sp" />
     </RadioGroup>
@@ -64,5 +69,6 @@
         style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:soundEffectsEnabled="false"
         android:text="@string/text_start_game" />
 </LinearLayout>

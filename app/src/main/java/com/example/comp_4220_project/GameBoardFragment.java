@@ -1,8 +1,12 @@
 package com.example.comp_4220_project;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,10 +62,14 @@ public class GameBoardFragment extends Fragment {
         }
     }
 
-    LinearLayout boardView, boardView2;
+    LinearLayout boardView, boardView2, b_linear;
     TextView textViewPlayerTurn;
     boolean[][] board, board2;
     int playerTurn;
+    MediaPlayer hit, restore;
+    Boolean m_mode, fx_mode, dark_mode;//holds app settings
+    SharedPreferences sp;// used to store settings as preferences
+    SharedPreferences.Editor editor;// used to edit preferences
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +83,15 @@ public class GameBoardFragment extends Fragment {
         board2 = ((GameActivity) getActivity()).getBoard2();
         playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
         textViewPlayerTurn.setText("Player " + playerTurn + "'s turn");
+        b_linear = (LinearLayout) view.findViewById(R.id.b_linear);
+
+        hit = MediaPlayer.create(getContext(), R.raw.hit);
+        restore = MediaPlayer.create(getContext(), R.raw.restore);
+
+        sp = getActivity().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        editor = sp.edit();
+        loadPreferences();
+
         drawBoard(board, boardView, (playerTurn == 1 && mode.equals("remove")) || (playerTurn == 2 && mode.equals("restore")), true);
         drawBoard(board2, boardView2, (playerTurn == 2 && mode.equals("remove")) || (playerTurn == 1 && mode.equals("restore")), false);
         return view;
@@ -137,6 +154,7 @@ public class GameBoardFragment extends Fragment {
                         return;
                     } else if (mode.equals("restore") && board[finalI][finalJ]) {
                         // restore tile
+                        sound(restore);
                         board[finalI][finalJ] = false;
                         GameActivity a = ((GameActivity) getActivity());
                         if(playerTurn == 1) {
@@ -151,6 +169,7 @@ public class GameBoardFragment extends Fragment {
                         return;
                     } else if (mode.equals("remove") && !board[finalI][finalJ]) {
                         // remove tile
+                        sound(hit);
                         board[finalI][finalJ] = true;
                     }
 
@@ -192,4 +211,36 @@ public class GameBoardFragment extends Fragment {
         view.post(() -> postponeEnterTransition(1500, TimeUnit.MILLISECONDS));
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(restore != null){
+            restore.release();
+            restore = null;
+        }
+        if(hit != null){
+            hit.release();
+            hit = null;
+        }
+    }
+
+    //if sound effects game setting is set to on, the MediaPlayer will play its audio
+    public void sound(MediaPlayer mp){
+        if(fx_mode){
+            mp.start();
+        }
+    }
+
+    //used to save the sharedPreferences as local variables
+    public void loadPreferences(){
+        m_mode = sp.getBoolean("music", false);
+        fx_mode = sp.getBoolean("fx", false);
+        dark_mode = sp.getBoolean("dark", false);
+        if(dark_mode){
+            b_linear.setBackgroundColor(getResources().getColor(R.color.black));
+        }
+        else{
+            b_linear.setBackgroundColor(getResources().getColor(R.color.yellow));
+        }
+    }
 }

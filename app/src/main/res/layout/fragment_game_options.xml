@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC107"
     tools:context=".GameOptionsFragment">
 
     <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFC107"
+
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
@@ -83,6 +83,7 @@
             style="@style/game_option_buttons_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:soundEffectsEnabled="false"
             android:text="@string/remove_tile"
             android:textSize="32sp"
             tools:ignore="VisualLintButtonSize" />
@@ -92,6 +93,7 @@
             style="@style/game_option_buttons_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:soundEffectsEnabled="false"
             android:text="@string/text_restore_tile"
             android:textSize="32sp"
             tools:ignore="VisualLintButtonSize" />
