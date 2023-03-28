@@ -111,7 +111,7 @@ public class GameBoardFragment extends Fragment {
 
                 // if the tile has been removed, grey it out so that it can still be pressed if restored
                 if(board[i][j]) {
-                    btn.setAlpha(0.1f);
+                    btn.setAlpha(0.5f);
 
                     // enable tiles that are on the edge of the player's own board
                     if (!disabled && mode.equals("restore")) {
