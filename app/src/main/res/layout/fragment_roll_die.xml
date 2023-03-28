@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFC107"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
@@ -17,14 +18,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="25dp"
+            android:fontFamily="@font/bungee"
             android:gravity="center"
             android:text="@string/text_player_2_turn"
-            android:textSize="48sp" />
+            android:textColor="#0256a3"
+            android:textSize="32sp" />
 
         <LinearLayout
             android:id="@+id/score_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFC107"
             android:orientation="horizontal">
 
             <TextView
@@ -33,7 +37,9 @@
                 android:layout_height="125dp"
                 android:layout_margin="25dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/oxanium_bold"
                 android:gravity="center"
+                android:textColor="#FFFFFF"
                 android:textSize="72sp" />
 
             <TextView
@@ -42,7 +48,9 @@
                 android:layout_height="125dp"
                 android:layout_margin="25dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/oxanium_bold"
                 android:gravity="center"
+                android:textColor="#FFFFFF"
                 android:textSize="72sp" />
         </LinearLayout>
 
@@ -50,6 +58,7 @@
             android:id="@+id/animation_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFC107"
             android:orientation="horizontal">
 
             <ImageView
@@ -80,11 +89,12 @@
 
         <Button
             android:id="@+id/continueButton"
+            style="@style/game_option_buttons_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="25dp"
             android:text="@string/text_roll_die"
-            android:textSize="40sp"
+            android:textSize="32sp"
             tools:ignore="VisualLintButtonSize" />
 
     </LinearLayout>

@@ -35,7 +35,7 @@ public class RollDieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_player1_roll_die, container, false);
+        View view = inflater.inflate(R.layout.fragment_roll_die, container, false);
         die_1 = (ImageView) view.findViewById(R.id.die_1_image);
         die_2 = (ImageView) view.findViewById(R.id.die_2_image);
         player = (TextView) view.findViewById(R.id.player_id);
@@ -125,25 +125,25 @@ public class RollDieFragment extends Fragment {
 
         if(turn == 1){
             player_x.setBackgroundColor(Color.parseColor(steel_blue));
-            player_x.getBackground().setAlpha(100);
+
             player_x.setText(String.valueOf(score_1));
-            player_x.setTextColor(Color.parseColor(steel_blue));
+            player_x.setTextColor(Color.WHITE);
             player_y.setBackgroundColor(Color.parseColor(english_violet));
-            player_y.getBackground().setAlpha(100);
+
             player_y.setText(String.valueOf(score_2));
-            player_y.setTextColor(Color.parseColor(english_violet));
+            player_y.setTextColor(Color.WHITE);
             player.setText(R.string.text_player_1_turn);
         }
 
         if(turn == 2){
             player_x.setBackgroundColor(Color.parseColor(english_violet));
-            player_x.getBackground().setAlpha(100);
+
             player_x.setText(String.valueOf(score_2));
-            player_x.setTextColor(Color.parseColor(english_violet));
+            player_x.setTextColor(Color.WHITE);
             player_y.setBackgroundColor(Color.parseColor(steel_blue));
-            player_y.getBackground().setAlpha(100);
+
             player_y.setText(String.valueOf(score_1));
-            player_y.setTextColor(Color.parseColor(steel_blue));
+            player_y.setTextColor(Color.WHITE);
             player.setText(R.string.text_player_2_turn);
         }
     }

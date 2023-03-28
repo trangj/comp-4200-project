@@ -74,7 +74,7 @@ public class GameBoardFragment extends Fragment {
         board = ((GameActivity) getActivity()).getBoard();
         board2 = ((GameActivity) getActivity()).getBoard2();
         playerTurn = ((GameActivity) getActivity()).getPlayerTurn();
-        textViewPlayerTurn.setText("It is currently player " + playerTurn + "'s turn");
+        textViewPlayerTurn.setText("Player " + playerTurn + "'s turn");
         drawBoard(board, boardView, (playerTurn == 1 && mode.equals("remove")) || (playerTurn == 2 && mode.equals("restore")), true);
         drawBoard(board2, boardView2, (playerTurn == 2 && mode.equals("remove")) || (playerTurn == 1 && mode.equals("restore")), false);
         return view;

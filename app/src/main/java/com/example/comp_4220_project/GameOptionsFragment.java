@@ -155,25 +155,21 @@ public class GameOptionsFragment extends Fragment {
 
         if(turn == 1){
             player_x.setBackgroundColor(Color.parseColor(steel_blue));
-            player_x.getBackground().setAlpha(100);
             player_x.setText(String.valueOf(score_1));
-            player_x.setTextColor(Color.parseColor(steel_blue));
+            player_x.setTextColor(Color.WHITE);
             player_y.setBackgroundColor(Color.parseColor(english_violet));
-            player_y.getBackground().setAlpha(100);
             player_y.setText(String.valueOf(score_2));
-            player_y.setTextColor(Color.parseColor(english_violet));
+            player_y.setTextColor(Color.WHITE);
             title.setText(R.string.text_player_1_turn);
         }
 
         if(turn == 2){
             player_x.setBackgroundColor(Color.parseColor(english_violet));
-            player_x.getBackground().setAlpha(100);
             player_x.setText(String.valueOf(score_2));
-            player_x.setTextColor(Color.parseColor(english_violet));
+            player_x.setTextColor(Color.WHITE);
             player_y.setBackgroundColor(Color.parseColor(steel_blue));
-            player_y.getBackground().setAlpha(100);
             player_y.setText(String.valueOf(score_1));
-            player_y.setTextColor(Color.parseColor(steel_blue));
+            player_y.setTextColor(Color.WHITE);
             title.setText(R.string.text_player_2_turn);
         }
     }

@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_weight="1"
+    android:background="#FFC107"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
     tools:context=".Home">
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="sans-serif-black"
-        android:text="RNG MAYHEM"
-        android:textColor="@color/teal_700"
-        android:textSize="55dp" />
-
-    <Button
-        android:id="@+id/settingsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:translationY="150dp"
-        android:text="Settings" />
+        android:fontFamily="@font/bungee_shade"
+        android:text="@string/text_title"
+        android:textAlignment="center"
+        android:textColor="#0256A3"
+        android:textSize="60sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/newGameButton"
+        style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:translationY="150dp"
-        android:text="New Game" />
+        android:text="@string/text_new_game" />
 
     <Button
         android:id="@+id/loadGameButton"
+        style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:translationY="150dp"
-        android:text="Load Game" />
+        android:text="@string/text_load_game" />
 
+    <Button
+        android:id="@+id/settingsButton"
+        style="@style/game_option_buttons_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_settings" />
 </LinearLayout>

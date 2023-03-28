@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFC107"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingLeft="10dp"
@@ -12,9 +13,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select Board Size" />
+        style="@style/text_view_style"
+        android:text="@string/text_select_board_size" />
 
     <RadioGroup
         android:id="@+id/boardSizeRadioGroup"
@@ -25,25 +25,44 @@
             android:id="@+id/radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:button="@android:drawable/btn_radio"
             android:checked="true"
-            android:text="3 X 3" />
+            android:fontFamily="@font/bungee"
+            android:text="@string/text_3_x_3"
+            android:textAlignment="center"
+            android:textSize="40sp" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4 X 4" />
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:button="@android:drawable/btn_radio"
+            android:fontFamily="@font/bungee"
+            android:text="@string/text_4_x_4"
+            android:textAlignment="center"
+            android:textSize="40sp" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="5 X 5" />
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:button="@android:drawable/btn_radio"
+            android:fontFamily="@font/bungee"
+            android:text="@string/text_5_x_5"
+            android:textAlignment="center"
+            android:textSize="40sp" />
     </RadioGroup>
 
     <Button
         android:id="@+id/startGameButton"
+        style="@style/game_option_buttons_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Game" />
+        android:text="@string/text_start_game" />
 </LinearLayout>

@@ -7,4 +7,25 @@
     <string name="text_die_two">Die 2</string>
     <string name="text_restore_tile">Restore Tile</string>
     <string name="remove_tile">Remove Tile</string>
+    <string name="text_title">RNG MAYHEM</string>
+    <string name="text_new_game">New Game</string>
+    <string name="text_settings">Settings</string>
+    <string name="text_load_game">Load Game</string>
+    <string name="text_select_board_size">Select Board Size</string>
+    <string name="text_3_x_3">3    X    3</string>
+    <string name="text_4_x_4">4    X    4</string>
+    <string name="text_5_x_5">5    X    5</string>
+    <string name="text_start_game">Start Game</string>
+    <string name="text_menu">Menu</string>
+    <string name="text_save_game">Save Game</string>
+    <string name="text_back">Back</string>
+    <string name="text_exit_to_main_menu">Exit Game</string>
+    <string name="text_player_2_board">Player 2 Board</string>
+    <string name="player_1_board">Player 1 Board</string>
+    <string name="text_main_menu">Main menu</string>
+    <string name="text_player_1_winner">Player 1 Wins!!!</string>
+    <string name="text_player_2_winner">Player 2 Wins!!!</string>
+    <string name="text_music">Music</string>
+    <string name="text_dark_mode">Dark Mode</string>
+    <string name="text_sound_fx">Sound FX</string>
 </resources>

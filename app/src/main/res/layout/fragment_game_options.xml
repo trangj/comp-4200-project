@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFC107"
     tools:context=".GameOptionsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFC107"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
@@ -16,10 +18,11 @@
             android:id="@+id/game_option_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="25dp"
+            android:fontFamily="@font/bungee"
             android:gravity="center"
             android:text="@string/text_player_2_turn"
-            android:textSize="48sp" />
+            android:textColor="#0256A3"
+            android:textSize="32sp" />
 
         <LinearLayout
             android:id="@+id/score_layout"
@@ -33,7 +36,9 @@
                 android:layout_height="125dp"
                 android:layout_margin="25dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/oxanium_bold"
                 android:gravity="center"
+                android:textColor="#FFFFFF"
                 android:textSize="72sp" />
 
             <TextView
@@ -42,7 +47,9 @@
                 android:layout_height="125dp"
                 android:layout_margin="25dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/oxanium_bold"
                 android:gravity="center"
+                android:textColor="#FFFFFF"
                 android:textSize="72sp" />
         </LinearLayout>
 
@@ -58,8 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/one"
-                android:contentDescription="@string/text_die_one" />
+                android:contentDescription="@string/text_die_one"
+                app:srcCompat="@drawable/one" />
 
             <ImageView
                 android:id="@+id/die_2_image"
@@ -67,31 +74,29 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/one"
-                android:contentDescription="@string/text_die_two" />
+                android:contentDescription="@string/text_die_two"
+                app:srcCompat="@drawable/one" />
         </LinearLayout>
 
         <Button
             android:id="@+id/removeTileButton"
+            style="@style/game_option_buttons_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="25dp"
             android:text="@string/remove_tile"
-            android:textSize="40sp"
+            android:textSize="32sp"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/restoreTileButton"
+            style="@style/game_option_buttons_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
             android:text="@string/text_restore_tile"
-            android:textSize="40sp"
+            android:textSize="32sp"
             tools:ignore="VisualLintButtonSize" />
 
     </LinearLayout>
-
 
 
 </FrameLayout>

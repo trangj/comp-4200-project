@@ -4,20 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ToggleButton;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 public class Settings extends AppCompatActivity {
     ToggleButton music_toggle, fx_toggle, dark_toggle;
+    Button back;
     View root;
     SharedPreferences sp;
     SharedPreferences.Editor editor;
@@ -35,6 +29,7 @@ public class Settings extends AppCompatActivity {
         music_toggle = findViewById(R.id.music_toggle);
         fx_toggle = findViewById(R.id.fx_toggle);
         dark_toggle = findViewById(R.id.dark_toggle);
+        back = findViewById(R.id.backButton);
 
         loadPreferences(music_toggle, fx_toggle, dark_toggle);
 
@@ -80,10 +75,10 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-    }
+        back.setOnClickListener(e -> {
+            finish();
+        });
 
-    public void back(){
-        finish();
     }
 
     public void loadPreferences(ToggleButton m, ToggleButton f, ToggleButton d){
