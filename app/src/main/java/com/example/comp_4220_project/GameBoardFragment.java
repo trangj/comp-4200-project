@@ -91,7 +91,6 @@ public class GameBoardFragment extends Fragment {
             for (int j = 0; j < M; j++) {
                 ContextThemeWrapper gameActivity = new ContextThemeWrapper((GameActivity) getActivity(), R.style.board_option_buttons_style);
                 Button btn = new Button(gameActivity);
-                //btn.setAp
 
                 if (isPlayer1) {
                     btn.setText(Integer.toString(N-i));
