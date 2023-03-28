@@ -15,6 +15,8 @@ public class GameActivity extends AppCompatActivity {
     int playerTurn = 1;
     int player_1_score = 0;
     int player_2_score = 0;
+    int player1NumRestored = 0;
+    int player2NumRestored = 0;
 
     public int getPlayer_1_score() { return player_1_score; }
 
@@ -27,6 +29,22 @@ public class GameActivity extends AppCompatActivity {
     public void set_zero(){
         this.player_1_score = 0;
         this.player_2_score = 0;
+    }
+
+    public int getPlayer1NumRestored() {
+        return player1NumRestored;
+    }
+
+    public void setPlayer1NumRestored(int player1NumRestored) {
+        this.player1NumRestored = player1NumRestored;
+    }
+
+    public int getPlayer2NumRestored() {
+        return player2NumRestored;
+    }
+
+    public void setPlayer2NumRestored(int player2NumRestored) {
+        this.player2NumRestored = player2NumRestored;
     }
 
     Button buttonMenu;
