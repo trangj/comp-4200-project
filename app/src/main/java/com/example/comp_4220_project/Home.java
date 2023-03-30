@@ -49,13 +49,17 @@ public class Home extends AppCompatActivity {
 
         //title drop in animation
         Animation dropInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.drop_in);
-        Animation slide_up = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+        Animation slide_up_1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up_1);
+        Animation slide_up_2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up_2);
+        Animation slide_up_3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up_3);
         title.setAnimation(dropInAnimation);
-        newGameButton.setAnimation(slide_up);
-        loadGameButton.setAnimation(slide_up);
-        settings.setAnimation(slide_up);
+        newGameButton.setAnimation(slide_up_1);
+        loadGameButton.setAnimation(slide_up_2);
+        settings.setAnimation(slide_up_3);
         dropInAnimation.start();
-        slide_up.start();
+        slide_up_1.start();
+        slide_up_2.start();
+        slide_up_3.start();
         //new game button listener
         newGameButton.setOnClickListener(e -> {
             sound(press);
