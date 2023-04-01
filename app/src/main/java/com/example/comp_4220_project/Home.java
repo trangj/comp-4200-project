@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -85,6 +86,7 @@ public class Home extends AppCompatActivity {
 
             if (gameSize == -1) {
                 Toast.makeText(getApplicationContext(), "No saved game found", Toast.LENGTH_SHORT).show();
+                Log.i("Game", "No game is saved in preferences.");
                 return;
             }
             sound(press);
